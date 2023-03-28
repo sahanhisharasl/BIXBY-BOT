@@ -4,13 +4,13 @@ services:
 
     plan: free
 
-    name: DxStreamerBot
+    name: BIXBY-BOT
 
     env: python
 
     buildCommand: pip install -r requirements.txt
 
-    startCommand: python3 -m Dxbots 
+    startCommand: python bot.py
 
     repo: https://github.com/DX-MODS/BIXBY-BOT.git      
 
