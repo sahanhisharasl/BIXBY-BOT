@@ -1,5 +1,6 @@
+
 import motor.motor_asyncio
-from info import DATABASE_NAME, DATABASE_URI, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT,MAX_RIST_BTNS, IMDB_DELET_TIME
+from info import DATABASE_NAME, DATABASE_URI, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, MAX_RIST_BTNS, IMDB_DELET_TIME                  
 
 class Database:
     
@@ -9,23 +10,23 @@ class Database:
         self.col = self.db.users
         self.grp = self.db.groups
 
+
     def new_user(self, id, name):
         return dict(
             id = id,
             name = name,
-            _id=int(id),                                   
-            file_id=None,
-            caption=None,
             ban_status=dict(
                 is_banned=False,
                 ban_reason="",
             ),
         )
 
-    def new_group(self, id, title):
+
+    def new_group(self, id, title, username):
         return dict(
             id = id,
             title = title,
+            username = username,
             chat_status=dict(
                 is_disabled=False,
                 reason="",
@@ -75,6 +76,8 @@ class Database:
     async def delete_user(self, user_id):
         await self.col.delete_many({'id': int(user_id)})
 
+    async def delete_chat(self, chat_id):
+        await self.grp.delete_many({'id': int(chat_id)})
 
     async def get_banned(self):
         users = self.col.find({'ban_status.is_banned': True})
@@ -82,9 +85,11 @@ class Database:
         b_chats = [chat['id'] async for chat in chats]
         b_users = [user['id'] async for user in users]
         return b_users, b_chats
+    
 
-    async def add_chat(self, chat, title):
-        chat = self.new_group(chat, title)
+
+    async def add_chat(self, chat, title, username):
+        chat = self.new_group(chat, title, username)
         await self.grp.insert_one(chat)
     
 
@@ -92,6 +97,7 @@ class Database:
         chat = await self.grp.find_one({'id':int(chat)})
         return False if not chat else chat.get('chat_status')
     
+
     async def re_enable_chat(self, id):
         chat_status=dict(
             is_disabled=False,
@@ -103,7 +109,7 @@ class Database:
         await self.grp.update_one({'id': int(id)}, {'$set': {'settings': settings}})
         
     
-    async def get_settings(self, id):
+    async def get_settings(self, id):       
         default = {
             'button': SINGLE_BUTTON,
             'botpm': P_TTI_SHOW_OFF,
@@ -111,13 +117,13 @@ class Database:
             'imdb': IMDB,
             'spell_check': SPELL_CHECK_REPLY,
             'welcome': MELCOW_NEW_USERS,
-            'template': IMDB_TEMPLATE
+            'template': IMDB_TEMPLATE            
         }
         chat = await self.grp.find_one({'id':int(id)})
         if chat:
             return chat.get('settings', default)
         return default
-    
+
 
     async def disable_chat(self, chat, reason="No Reason"):
         chat_status=dict(
@@ -138,28 +144,6 @@ class Database:
 
     async def get_db_size(self):
         return (await self.db.command("dbstats"))['dataSize']
-    
-
-    async def set_thumbnail(self, id, file_id):
-        await self.col.update_one({'id': int(id)}, {'$set': {'file_id': file_id}})
-        
-    async def get_thumbnail(self, id):
-        try:
-            thumbnail = await self.col.find_one({'id': int(id)})
-            if thumbnail:
-                return thumbnail.get('file_id')
-            else:
-                return None
-        except Exception as e:
-            print(e)
 
 
-    async def set_caption(self, id, caption):
-        await self.col.update_one({'id': int(id)}, {'$set': {'caption': caption}})
-
-    async def get_caption(self, id):
-        user = await self.col.find_one({'id': int(id)})
-        return user.get('caption', None)
-
-
-db = Database(DATABASE_URI, DATABASE_NAME)
+db = Database(DATABASE_URI, DATABASE_NAME))
