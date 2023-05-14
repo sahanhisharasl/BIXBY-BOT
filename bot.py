@@ -25,8 +25,8 @@ if WEBHOOK:
 # Get logging configurations
 logging.config.fileConfig("logging.conf")
 logging.getLogger().setLevel(logging.INFO)
-logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("cinemagoer").setLevel(logging.ERROR)
+
 LOGGER = logging.getLogger(__name__)
 TIMEZONE = (os.environ.get("TIMEZONE", "Asia/Kolkata"))
 
@@ -40,7 +40,7 @@ class Bot(Client):
             bot_token=BOT_TOKEN,
             workers=300,
             plugins={"root": "plugins"},
-            sleep_threshold=15,
+            sleep_threshold=10,
         )
 
     async def start(self):
@@ -94,5 +94,9 @@ class Bot(Client):
         
 app = Bot()
 app.run()
+
+
+
+
 
 
