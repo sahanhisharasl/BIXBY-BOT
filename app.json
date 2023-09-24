@@ -1,7 +1,7 @@
 {
     "name": "BIXBY-BOT",
     "description": "An Advanced Telegram Auto Filter Bot",
-    "logo": "https",
+    "logo": "https://graph.org/file/0137b122cd785074c1499.jpg",
     "keywords": ["Telegram", "auto-filter", "DX-MODS"],
     "repository": "https://github.com/DX-MODS/BIXBY-BOT",
     "env": {
