@@ -15,7 +15,7 @@ async def telegraph_upload(bot, update):
         return await update.reply_text("Not Supported!")
     text = await update.reply_text(text="<code>Downloading To My Server ...</code>", disable_web_page_preview=True)   
     media = await update.reply_to_message.download()   
-    await text.edit_text(text="<code>Downloading Completed. Now I am Uploading to telegra.ph Link ...</code>", disable_web_page_preview=True)                                            
+    await text.edit_text(text="<code>Downloading Completed. Now I am Uploading to graph.org Link ...</code>", disable_web_page_preview=True)                                            
     try:
         response = upload_file(media)
     except Exception as error:
