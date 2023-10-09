@@ -7,7 +7,7 @@
 from pyrogram import Client, filters, enums 
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import UserNotParticipant
-from helper.database import db
+from database.users_chats_db import db
 from info import AUTH_CHANNEL
 
 async def not_subscribed(_, client, message):
