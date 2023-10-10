@@ -16,7 +16,7 @@ async def logo(bot, msg: Message):
         photo=f"{req}")
 
 @Client.on_message(filters.command("animelogo"))
-async def logo(bot, msg: Message):
+async def animelogo(bot, msg: Message):
     if len(msg.command) == 1:
        return await msg.reply_text("Usage:\n\n /animelogo Jeol")
     logo_name = msg.text.split(" ", 1)[1]
