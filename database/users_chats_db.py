@@ -1,3 +1,9 @@
+# Copyright (C) 2023 DX-MODS
+#Licensed under the  AGPL-3.0 License;
+#you may not use this file except in compliance with the License.
+#Author ZIYAN
+#if you use our codes try to donate here https://www.buymeacoffee.com/ziyankp
+
 import motor.motor_asyncio
 from info import DATABASE_NAME, DATABASE_URL, IMDB, IMDB_TEMPLATE, MELCOW_NEW_USERS, P_TTI_SHOW_OFF, SINGLE_BUTTON, SPELL_CHECK_REPLY, PROTECT_CONTENT, MAX_RIST_BTNS, IMDB_DELET_TIME                  
 
