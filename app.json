@@ -1,8 +1,8 @@
 {
     "name": "BIXBY-BOT",
     "description": "An Advanced Telegram Auto Filter Bot",
-    "logo": "https://graph.org/file/0137b122cd785074c1499.jpg",
-    "keywords": ["Telegram", "auto-filter", "DX-MODS"],
+    "logo": "https://graph.org/file/574a46c1e4372fa86999d.jpg",
+    "keywords": ["Telegram", "auto-filter", "BIXBY-BOT"],
     "repository": "https://github.com/DX-MODS/BIXBY-BOT",
     "env": {
         "WEBHOOK": {
@@ -57,7 +57,7 @@
         },
         "CUSTOM_FILE_CAPTION": {
             "description": "A custom file caption for your files. formatable with , file_name, file_caption, file_size, Read Readme.md for better understanding.",
-            "value": "Hey {mention}👋\n\n{file_name}\n\n🔘 size - {file_size}\n\n╭─── • ❰ @MR_LINK_Z ❱ • ────➤\n┣ ▫️ @MRxSERIES\n┣ ▫️ @MalluMovie_Official\n╰─────── • ◆ • ───────➤",
+            "value": "Hey {mention}👋\n\n{file_name}\n\n🔘 size - {file_size}\n\n╭─── • ❰ @DXMOVIES1 ❱ • ────➤\n┣ ▫️ @DXSERIES\n┣ ▫️ @dxmodsupdates\n╰─────── • ◆ • ───────➤",
             "required": false
         },
         "DATABASE_URL": {
@@ -76,7 +76,7 @@
         },
         "SUPPORT_CHAT": {
             "description": "Updated Channel Username Without @ Not Chanel ID",
-            "value": "MKN_BOTZ_DISCUSSION_GROUP",
+            "value": "DXMODS_Support",
             "required": false
         },
         "IMDB": {
@@ -100,7 +100,7 @@
             "required": false
         },
         "SINGLE_BUTTON": {
-            "description": "choose b/w single or double buttons https://github.com/Aadhi000/Ajax/issues/22",
+            "description": "choose b/w single or double buttons",
             "value": "True",
             "required": false         
         },
