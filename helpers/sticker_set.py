@@ -1,7 +1,11 @@
+# Copyright (C) 2023 DX-MODS
+#Licensed under the  AGPL-3.0 License;
+#you may not use this file except in compliance with the License.
+#Author ZIYAN
+#if you use our codes try to donate here https://www.buymeacoffee.com/ziyankp
+
 from typing import List
-
 from pyrogram import Client, errors, raw
-
 
 async def get_sticker_set_by_name(
         client: Client, name: str
