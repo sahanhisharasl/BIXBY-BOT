@@ -8,7 +8,7 @@ import requests
 @Client.on_message(filters.command("logo"))
 async def logo(bot, msg: Message):
     if len(msg.command) == 1:
-       return await msg.reply_text("Usage:\n\n /logo Jeol")
+       return await msg.reply_text("Usage:\n\n /logo Ziyan")
     logo_name = msg.text.split(" ", 1)[1]
     API = f"https://api.sdbots.tech/logohq?text={logo_name}"
     req = requests.get(API).url
@@ -18,7 +18,7 @@ async def logo(bot, msg: Message):
 @Client.on_message(filters.command("animelogo"))
 async def animelogo(bot, msg: Message):
     if len(msg.command) == 1:
-       return await msg.reply_text("Usage:\n\n /animelogo Jeol")
+       return await msg.reply_text("Usage:\n\n /animelogo Ziyan")
     logo_name = msg.text.split(" ", 1)[1]
     API = f"https://api.sdbots.tech/anime-logo?name={logo_name}"
     req = requests.get(API).url
