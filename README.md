@@ -21,7 +21,7 @@
 
 <div align="left">
 
-### Features
+## Features
 
 - [x] Auto Filter
 - [x] Manual Filter
@@ -29,14 +29,29 @@
 - [x] Admin Commands
 - [x] Broadcast
 - [x] Index
-- [x] IMDB search
+- [x] IMDB Search
 - [x] Inline Search
-- [x] Random pics
-- [x] ids and User info 
+- [x] Random Pics
+- [x] Ids And User Info
 - [x] Stats, Users, Chats, Ban, Unban, Leave, Disable, Channel
 - [x] Spelling Check Feature
 - [x] Custom File Caption
-
+- [x] Group Broadcast 
+- [x] AutoFilter Auto Delete
+- [x] Junk Group & Users Clearing On Database
+- [x] Global Filter
+- [x] Url Shortner In Autofilter
+- [x] Custom Button Lock
+- [x] Image Editor & Background Remover
+- [x] Telegraph, Pin, Json, Password Generator
+- [x] Ban, Mute, Unmute, Etc... Group Manager
+- [x] Custom Welcome Message
+- [x] Advanced Admin Panel
+- [x] Photo Changing In All Buttons
+- [x] Custom Start Message
+- [x] Custom Button Alter Message
+- [x] Advanced Status (Disk, Cpu, Ram, Uptime..) In Image Type
+- [x] Logo Maker anime and normal logo
 ### Required Variables
 * `BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
 * `API_ID`: Get this value from [telegram.org](https://my.telegram.org/apps)
