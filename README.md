@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://graph.org/file/574a46c1e4372fa86999d.jpg" alt="JPG" width="500" height="500"/>
+<img src="https://graph.org/file/574a46c1e4372fa86999d.jpg" alt="JPG" width="300" height="250"/>
 </p>
 <a href="https://github.com/DX-MODS/BIXBY-BOT/stargazers"><img src="https://img.shields.io/github/stars/DX-MODS/BIXBY-BOT?color=black&logo=github&logoColor=black&style=for-the-badge" alt="Stars" /></a>
 <a href="https://github.com/DX-MODS/BIXBY-BOT/network/members"> <img src="https://img.shields.io/github/forks/DX-MODS/BIXBY-BOT?color=black&logo=github&logoColor=black&style=for-the-badge" /></a>
