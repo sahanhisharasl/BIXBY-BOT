@@ -24,7 +24,7 @@ async def make_carbon(code, tele=False):
     return image
 
 
-@Client.on_message(filters.command("carbon"))
+@Client.on_message(filters.command(["font"], Config.PREFIX))
 async def carbon_func(b, message):
     if not message.reply_to_message:
         return await message.reply_text("ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴛᴇxᴛ ᴍᴇssᴀɢᴇ ᴛᴏ ᴍᴀᴋᴇ ᴄᴀʀʙᴏɴ.")
