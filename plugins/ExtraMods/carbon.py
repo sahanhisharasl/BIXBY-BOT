@@ -8,6 +8,7 @@ from pyrogram import Client, filters
 from pyrogram.types import *
 from aiohttp import ClientSession
 from telegraph import upload_file
+from info import PREFIX
 from io import BytesIO
 
 ai_client = ClientSession()
@@ -24,7 +25,7 @@ async def make_carbon(code, tele=False):
     return image
 
 
-@Client.on_message(filters.command(["carbon"], Config.PREFIX))
+@Client.on_message(filters.command(["carbon"], PREFIX))
 async def carbon_func(b, message):
     if not message.reply_to_message:
         return await message.reply_text("ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴛᴇxᴛ ᴍᴇssᴀɢᴇ ᴛᴏ ᴍᴀᴋᴇ ᴄᴀʀʙᴏɴ.")
