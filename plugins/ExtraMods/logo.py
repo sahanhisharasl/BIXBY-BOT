@@ -11,7 +11,7 @@ from pyrogram.types import *
 import requests
 
 
-@Client.on_message(filters.command("logo"))
+@Client.on_message(filters.command(["logo"], PREFIX))
 async def logo(bot, msg: Message):
     if len(msg.command) == 1:
        return await msg.reply_text("Usage:\n\n /logo Ziyan")
