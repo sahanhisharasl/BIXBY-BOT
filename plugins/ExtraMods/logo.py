@@ -8,6 +8,7 @@ from pyrogram import Client, filters, idle
 import pyrogram, asyncio, random, time
 from pyrogram.errors import FloodWait
 from pyrogram.types import *
+from info import PREFIX
 import requests
 
 
