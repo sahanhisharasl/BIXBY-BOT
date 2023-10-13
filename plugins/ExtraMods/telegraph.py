@@ -11,7 +11,7 @@ from telegraph import upload_file
 from utils import get_file_id
 
 
-@Client.on_message(filters.command("telegraph") & filters.private)
+@Client.on_message(filters.command(["telegraph"], PREFIX) & filters.private)
 async def telegraph_upload(bot, update):
     replied = update.reply_to_message
     if not replied:
