@@ -8,6 +8,7 @@ import pyrogram
 import asyncio
 import os
 from pyrogram import filters, Client
+from info import PREFIX
 
 @Client.on_message((filters.command(["report"], PREFIX) | filters.regex("@admins") | filters.regex("@admin")) & filters.group)
 async def report_user(bot, message):
