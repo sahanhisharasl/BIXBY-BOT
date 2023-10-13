@@ -19,6 +19,7 @@ from typing import Union, Optional, AsyncGenerator
 
 from plugins import web_server 
 from aiohttp import web
+from helpers.ping_server import ping_server
 
 # Get logging configurations
 logging.config.fileConfig("logging.conf")
