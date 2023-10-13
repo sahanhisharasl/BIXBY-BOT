@@ -8,7 +8,7 @@ import os
 from helpers.font_string import Fonts
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
+from info import PREFIX
 
 @Client.on_message(filters.command(["font"], PREFIX))
 async def style_buttons(c, m, cb=False):
