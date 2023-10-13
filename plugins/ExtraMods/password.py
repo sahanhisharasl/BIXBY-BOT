@@ -7,9 +7,9 @@
 import random, os
 from pyrogram import Client, filters, enums 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from info import PREFIX
 
-
-@Client.on_message(filters.command(["genpassword", 'genpw']))
+@Client.on_message(filters.command(["genpassword", 'genpw'], PREFIX))
 async def password(bot, update):
     message = await update.reply_text(text="`Pʀᴏᴄᴇꜱꜱɪɴɢ..`")
     password = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+".lower()
