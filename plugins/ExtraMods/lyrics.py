@@ -7,11 +7,12 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton 
 import requests, os
+from info import PREFIX
 
 
 API = "https://apis.xditya.me/lyrics?song="
 
-@Client.on_message(filters.text & filters.command(["lyrics"]))
+@Client.on_message(filters.text & filters.command(["lyrics"], PREFIX))
 async def sng(bot, message):
         if not message.reply_to_message:
           await message.reply_text("Pʟᴇᴀꜱᴇ Rᴇᴩʟʏ To A Mᴇꜱꜱᴀɢᴇ")
