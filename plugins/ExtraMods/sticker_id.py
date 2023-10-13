@@ -1,4 +1,5 @@
 from pyrogram import Client, filters
+from info import PREFIX
 
 @Client.on_message(filters.command(["stickerid"], PREFIX))
 async def stickerid(bot, message):   
