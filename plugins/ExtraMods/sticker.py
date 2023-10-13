@@ -12,12 +12,13 @@ from pyrogram.types import *
 from pyrogram.errors import *
 from helpers.files import *
 from helpers.sticker_set import *
+from info import PREFIX
     
 MAX_STICKERS = (120)  # would be better if we could fetch this limit directly from telegram
 SUPPORTED_TYPES = ["jpeg", "png", "webp"]
 
 
-@Client.on_message(filters.command("get_sticker"))
+@Client.on_message(filters.command(["get_sticker"], PREFIX))
 async def sticker_image(_, message: Message):
     r = message.reply_to_message
 
@@ -43,7 +44,7 @@ async def sticker_image(_, message: Message):
 
 
 
-@Client.on_message(filters.command("kang"))
+@Client.on_message(filters.command(["kang"], PREFIX))
 async def kang(client, message: Message):
     BOT_USERNAME = client.username
     if not message.reply_to_message:
