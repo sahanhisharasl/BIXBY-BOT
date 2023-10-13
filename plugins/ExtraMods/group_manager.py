@@ -18,7 +18,7 @@ import asyncio
 
 
 
-@Client.on_message(filters.command("ban"))
+@Client.on_message(filters.command(["ban"], PREFIX))
 async def ban_user(_, message):
     is_admin = await admin_check(message)
     if not is_admin: return 
@@ -32,7 +32,7 @@ async def ban_user(_, message):
             await message.reply_text(f"Someone else is dusting off..! \n<a href='tg://user?id={user_id}'>{user_first_name}</a> Is forbidden")                      
             
 
-@Client.on_message(filters.command("tban"))
+@Client.on_message(filters.command(["tban"], PREFIX))
 async def temp_ban_user(_, message):
     is_admin = await admin_check(message)
     if not is_admin: return
@@ -49,7 +49,7 @@ async def temp_ban_user(_, message):
             await message.reply_text(f"Someone else is dusting off..!\n<a href='tg://user?id={user_id}'>Lavane</a>\n banned for {message.command[1]}!")
                 
 
-@Client.on_message(filters.command(["unban", "unmute"]))
+@Client.on_message(filters.command(["unban", "unmute"], PREFIX))
 async def un_ban_user(_, message):
     is_admin = await admin_check(message)
     if not is_admin: return
@@ -63,7 +63,7 @@ async def un_ban_user(_, message):
             await message.reply_text(f"Okay, changed ... now <a href='tg://user?id={user_id}'>{user_first_name}</a> To You can join the group!")           
             
 
-@Client.on_message(filters.command("mute"))
+@Client.on_message(filters.command(["mute"], PREFIX))
 async def mute_user(_, message):
     is_admin = await admin_check(message)
     if not is_admin: return
@@ -77,7 +77,7 @@ async def mute_user(_, message):
             await message.reply_text(f"👍🏻 <a href='tg://user?id={user_id}'>Of lavender</a> The mouth is closed! 🤐")
 
 
-@Client.on_message(filters.command("tmute"))
+@Client.on_message(filters.command(["tmute"], PREFIX))
 async def temp_mute_user(_, message):
     is_admin = await admin_check(message)
     if not is_admin: return
@@ -97,20 +97,20 @@ async def temp_mute_user(_, message):
             await message.reply_text(f"Be quiet for a while! 😠 <a href='tg://user?id={user_id}'>Of lavender</a>  Mouth  muted for {message.command[1]}!")                
 
 
-@Client.on_message(filters.command("pin") & filters.create(admin_filter))
+@Client.on_message(filters.command(["pin"], PREFIX) & filters.create(admin_filter))
 async def pin(_, message: Message):
     if not message.reply_to_message: return
     await message.reply_to_message.pin()
 
 
-@Client.on_message(filters.command("unpin") & filters.create(admin_filter))             
+@Client.on_message(filters.command(["unpin"], PREFIX) & filters.create(admin_filter))             
 async def unpin(_, message: Message):
     if not message.reply_to_message: return
     await message.reply_to_message.unpin()
 
 
 
-@Client.on_message(filters.command("purge") & (filters.group | filters.channel))                   
+@Client.on_message(filters.command(["purge"], PREFIX) & (filters.group | filters.channel))                   
 async def purge(client, message):
     if message.chat.type not in ((enums.ChatType.SUPERGROUP, enums.ChatType.CHANNEL)): return
     is_admin = await admin_check(message)
@@ -133,7 +133,7 @@ async def purge(client, message):
     await status_message.delete()
     
 
-@Client.on_message(filters.group & filters.command('inkick'))
+@Client.on_message(filters.group & filters.command(["inkick"], PREFIX))
 async def inkick(client, message):
     user = await client.get_chat_member(message.chat.id, message.from_user.id)
     if user.status not in (enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER):      
@@ -165,7 +165,7 @@ async def inkick(client, message):
         await message.reply_text(script.INPUT_REQUIRED)
   
 
-@Client.on_message(filters.group & filters.command('dkick'))
+@Client.on_message(filters.group & filters.command(["dkick"], PREFIX))
 async def dkick(client, message):
     user = await client.get_chat_member(message.chat.id, message.from_user.id)
     if user.status not in (enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER):      
@@ -192,7 +192,7 @@ async def dkick(client, message):
     except ChatWriteForbidden: pass
   
   
-@Client.on_message((filters.channel | filters.group) & filters.command('instatus'))
+@Client.on_message((filters.channel | filters.group) & filters.command(["instatus"], PREFIX))
 async def instatus(client, message):
     user = await client.get_chat_member(message.chat.id, message.from_user.id)
     if user.status not in (enums.ChatMemberStatus.ADMINISTRATOR, enums.ChatMemberStatus.OWNER, ADMINS):
