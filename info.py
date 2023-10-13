@@ -26,9 +26,9 @@ WEBHOOK = bool(environ.get("WEBHOOK", True)) # for web support on/off
 PICS = (environ.get('PICS' ,'https://graph.org/file/0443b7c2c75ecd0e20712.jpg https://graph.org/file/9dbd024664e2b558cc988.jpg https://graph.org/file/a1dd68cb33bf75c663bef.jpg https://graph.org/file/37d2fbad7975bda9934c5.jpg https://graph.org/file/b301bdbb7641c9d76dc78.jpg')).split()
 PREFIX = environ.get('PREFIX', "/")
 UPTIME = time.time()
-PORT = int(os.environ.get("PORT", "8080"))
-PING_INTERVAL = int(os.environ.get("PING_INTERVAL", "120"))
-PING_WEB   = os.environ.get("PING_WEB", "")
+PORT = int(environ.get("PORT", "8080"))
+PING_INTERVAL = int(environ.get("PING_INTERVAL", "120"))
+PING_WEB   = environ.get("PING_WEB", "")
 
 # Admins, Channels & Users
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
