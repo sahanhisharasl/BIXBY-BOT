@@ -12,7 +12,7 @@ from googletrans import Translator
 from gtts import gTTS
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from info inport PREFIX
+from info import PREFIX
 
 def convert(text):
     audio = BytesIO()
