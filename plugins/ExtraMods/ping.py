@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
-from info import PREFIX, 
+from info import PREFIX, ADMINS
 import time
-@Client.on_message(filters.command("ping", PREFIX) & filters.user(ADMIN))
+@Client.on_message(filters.command("ping", PREFIX) & filters.user(ADMINS))
 async def ping(_, message):
     start_t = time.time()
     rm = await message.reply_text("...")
