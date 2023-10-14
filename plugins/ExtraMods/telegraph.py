@@ -9,6 +9,7 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
 from telegraph import upload_file
 from utils import get_file_id
+from info inport PREFIX
 
 
 @Client.on_message(filters.command(["telegraph"], PREFIX) & filters.private)
