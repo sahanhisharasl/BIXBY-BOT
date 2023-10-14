@@ -8,7 +8,7 @@ import os
 from pyrogram import Client, filters
 from urllib.parse import quote
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from info inport PREFIX
+from info import PREFIX
 
 @Client.on_message(filters.command(["share_text", "share", "sharetext", "textshare"], PREFIX))
 async def share_text(client, message):
