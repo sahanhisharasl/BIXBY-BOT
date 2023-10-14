@@ -7,14 +7,14 @@
 from pyrogram import filters, Client, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.connections_mdb import add_connection, all_connections, if_active, delete_connection
-from info import ADMINS
+from info import ADMINS, PREFIX
 import logging
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 
 
-@Client.on_message((filters.private | filters.group) & filters.command('connect'))
+@Client.on_message((filters.private | filters.group) & filters.command(["connect"], PREFIX))
 async def addconnection(client, message):
     userid = message.from_user.id if message.from_user else None
     if not userid:
@@ -75,7 +75,7 @@ async def addconnection(client, message):
         return await message.reply_text('Some error occurred! Try again later.', quote=True)
      
 
-@Client.on_message((filters.private | filters.group) & filters.command('disconnect'))
+@Client.on_message((filters.private | filters.group) & filters.command(["disconnect"], PREFIX))
 async def deleteconnection(client, message):
     userid = message.from_user.id if message.from_user else None
     if not userid:
@@ -101,7 +101,7 @@ async def deleteconnection(client, message):
             await message.reply_text("This chat isn't connected to me!\nDo /connect to connect.", quote=True)
 
 
-@Client.on_message(filters.private & filters.command(["connections"]))
+@Client.on_message(filters.private & filters.command(["connections"], PREFIX))
 async def connections(client, message):
     userid = message.from_user.id
     groupids = await all_connections(str(userid))
