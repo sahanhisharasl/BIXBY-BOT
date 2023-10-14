@@ -10,10 +10,10 @@ from pyrogram.errors.exceptions.bad_request_400 import MessageTooLong, PeerIdInv
 from pyrogram.types import Message, InlineKeyboardButton
 from pyrogram import Client, filters, enums
 from database.users_chats_db import db
-from info import ADMINS
+from info import ADMINS, PREFIX
 
         
-@Client.on_message(filters.command("broadcast") & filters.user(ADMINS) & filters.reply)
+@Client.on_message(filters.command(["broadcast"], PREFIX) & filters.user(ADMINS) & filters.reply)
 async def broadcast(bot, message):
     users = await db.get_all_users()
     b_msg = message.reply_to_message
@@ -44,7 +44,7 @@ async def broadcast(bot, message):
     await bot.send_message(message.chat.id, f"Bʀᴏᴀᴅᴄᴀsᴛ Coᴍᴩʟᴇᴛᴇᴅ:\nTɪᴍᴇ Tᴀᴋᴇᴅ{time_taken} Sᴇᴄ\n\nTᴏᴛᴀʟ Uꜱᴇʀꜱ: {total_users}\nCᴏᴍᴩʟᴇᴛᴇᴅ: {done} / {total_users}\nSucᴄᴇꜱꜱ: {success}\nBʟᴏᴄᴋᴇᴅ: {blocked}\nDᴇʟᴇᴛᴇᴅ: {deleted}")
 
 
-@Client.on_message(filters.command("clear_junk") & filters.user(ADMINS))
+@Client.on_message(filters.command(["clear_junk"], PREFIX) & filters.user(ADMINS))
 async def remove_junkuser__db(bot, message):
     users = await db.get_all_users()
     b_msg = message 
@@ -72,7 +72,7 @@ async def remove_junkuser__db(bot, message):
     await bot.send_message(message.chat.id, f"Completed:\nCompleted in {time_taken} seconds.\n\nTotal Users {total_users}\nCompleted: {done} / {total_users}\nBlocked: {blocked}\nDeleted: {deleted}")
 
 
-@Client.on_message(filters.command("group_broadcast") & filters.user(ADMINS) & filters.reply)
+@Client.on_message(filters.command(["group_broadcast"], PREFIX) & filters.user(ADMINS) & filters.reply)
 async def broadcast_group(bot, message):
     groups = await db.get_all_chats()
     b_msg = message.reply_to_message
@@ -110,7 +110,7 @@ async def broadcast_group(bot, message):
         os.remove("reason.txt")
 
       
-@Client.on_message(filters.command(["junk_group", "clear_junk_group"]) & filters.user(ADMINS))
+@Client.on_message(filters.command(["junk_group", "clear_junk_group"], PREFIX) & filters.user(ADMINS))
 async def junk_clear_group(bot, message):
     groups = await db.get_all_chats()
     b_msg = message
