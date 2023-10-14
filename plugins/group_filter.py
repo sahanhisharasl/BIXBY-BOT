@@ -11,7 +11,7 @@ from utils import get_shortlink, admin_filter
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, make_inactive
 from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, PM_IMDB, SINGLE_BUTTON, PROTECT_CONTENT, \
-    SPELL_CHECK_REPLY, IMDB_TEMPLATE, IMDB_DELET_TIME, START_MESSAGE, PMFILTER, G_FILTER, BUTTON_LOCK, BUTTON_LOCK_TEXT, SHORT_URL, SHORT_API
+    SPELL_CHECK_REPLY, IMDB_TEMPLATE, IMDB_DELET_TIME, START_MESSAGE, PMFILTER, G_FILTER, BUTTON_LOCK, BUTTON_LOCK_TEXT, SHORT_URL, SHORT_API, PREFIX
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram import Client, filters, enums 
@@ -30,7 +30,7 @@ FILTER_MODE = {}
 G_MODE = {}
 SPELL_CHECK = {}
 
-@Client.on_message(filters.command('autofilter') & filters.group & filters.create(admin_filter))
+@Client.on_message(filters.command(["autofilter"], PREFIX) & filters.group & filters.create(admin_filter))
 async def fil_mod(client, message): 
       mode_on = ["yes", "on", "true"]
       mode_of = ["no", "off", "false"]
@@ -53,7 +53,7 @@ async def fil_mod(client, message):
           await m.edit("ᴜꜱᴇ :- `/autofilter on` ᴏʀ `/autofilter off`")
 
 
-@Client.on_message(filters.command('g_filter') & filters.group & filters.create(admin_filter))
+@Client.on_message(filters.command(["g_filter"], PREFIX) & filters.group & filters.create(admin_filter))
 async def g_fil_mod(client, message): 
       mode_on = ["yes", "on", "true"]
       mode_of = ["no", "off", "false"]
