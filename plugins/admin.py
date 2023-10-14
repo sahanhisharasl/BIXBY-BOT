@@ -15,6 +15,7 @@ from database.users_chats_db import db
 from database.ia_filterdb import Media
 from datetime import datetime
 from Script import script
+from info import PREFIX
 import logging, re, asyncio, time, shutil, psutil, os, sys
 
 logger = logging.getLogger(__name__)
@@ -48,7 +49,7 @@ async def savegroup_and_welcome(bot, message):
             else: temp.MELCOW['welcome'] = await message.reply_text(text=WELCOM_TEXT.format(user=u.mention, chat=message.chat.title))
 
 
-@Client.on_message(filters.command('leave') & filters.user(ADMINS))
+@Client.on_message(filters.command(["leave"], PREFIX) & filters.user(ADMINS))
 async def leave_a_chat(bot, message):
     if len(message.command) == 1: return await message.reply('Gɪᴠᴇ Mᴇ A Cʜᴀᴛ Iᴅ')
     chat = message.command[1]
@@ -61,7 +62,7 @@ async def leave_a_chat(bot, message):
     except Exception as e:
         await message.reply(f'Eʀʀᴏʀ: {e}')
 
-@Client.on_message(filters.command('disable') & filters.user(ADMINS))
+@Client.on_message(filters.command(["disable"], PREFIX) & filters.user(ADMINS))
 async def disable_chat(bot, message):
     if len(message.command) == 1: return await message.reply('Gɪᴠᴇ Mᴇ A Cʜᴀᴛ Iᴅ')
     r = message.text.split(None)
@@ -91,7 +92,7 @@ async def disable_chat(bot, message):
         await message.reply(f"Eʀʀᴏʀ: {e}")
 
 
-@Client.on_message(filters.command('enable') & filters.user(ADMINS))
+@Client.on_message(filters.command(["enable"], PREFIX) & filters.user(ADMINS))
 async def re_enable_chat(bot, message):
     if len(message.command) == 1: return await message.reply('Gɪᴠᴇ Mᴇ A Cʜᴀᴛ Iᴅ')
     chat = message.command[1]
@@ -106,7 +107,7 @@ async def re_enable_chat(bot, message):
     await message.reply("Cʜᴀᴛ Sᴜᴄᴄᴇꜱꜰᴜʟʟʏ Rᴇ-Eɴᴀʙʟᴇᴅ")
 
 
-@Client.on_message(filters.command('stats') & filters.incoming)
+@Client.on_message(filters.command(["stats"], PREFIX) & filters.incoming)
 async def get_ststs(bot, message):
     rju = await message.reply('<b>Pʟᴇᴀꜱᴇ Wᴀɪᴛ...</b>')
     total_users = await db.total_users_count()
@@ -119,7 +120,7 @@ async def get_ststs(bot, message):
     await rju.edit(script.STATUS_TXT.format(files, total_users, totl_chats, size, free))
 
 
-@Client.on_message(filters.command('invite') & filters.user(ADMINS))
+@Client.on_message(filters.command(["invite"], PREFIX) & filters.user(ADMINS))
 async def gen_invite(bot, message):
     if len(message.command) == 1: return await message.reply('Gɪᴠᴇ Mᴇ A Cʜᴀᴛ Iᴅ')
     chat = message.command[1]
@@ -133,7 +134,7 @@ async def gen_invite(bot, message):
         return await message.reply(f'Eʀʀᴏʀ: {e}')
     await message.reply(f'Hᴇʀᴇ Iꜱ Yᴏᴜʀ Iɴᴠɪᴛᴇ Lɪɴᴋ: {link.invite_link}')
 
-@Client.on_message(filters.command('ban_user') & filters.user(ADMINS))
+@Client.on_message(filters.command(["ban_user"], PREFIX) & filters.user(ADMINS))
 async def ban_a_user(bot, message):
     if len(message.command) == 1: return await message.reply('Gɪᴠᴇ Mᴇ A Uꜱᴇʀ Iᴅ / Uꜱᴇʀɴᴀᴍᴇ')
     r = message.text.split(None)
@@ -158,7 +159,7 @@ async def ban_a_user(bot, message):
 
 
     
-@Client.on_message(filters.command('unban_user') & filters.user(ADMINS))
+@Client.on_message(filters.command(["unban_user"], PREFIX) & filters.user(ADMINS))
 async def unban_a_user(bot, message):
     if len(message.command) == 1: return await message.reply('Gɪᴠᴇ Mᴇ A Uꜱᴇʀ Iᴅ / Uꜱᴇʀɴᴀᴍᴇ')
     r = message.text.split(None)
@@ -183,7 +184,7 @@ async def unban_a_user(bot, message):
 
 
     
-@Client.on_message(filters.command('users') & filters.user(ADMINS))
+@Client.on_message(filters.command(["users"], PREFIX) & filters.user(ADMINS))
 async def list_users(bot, message):
     sps = await message.reply('Gᴇᴛᴛɪɴɢ Lɪꜱᴛ Oꜰ Uꜱᴇʀꜱ')
     users = await db.get_all_users()
@@ -197,7 +198,7 @@ async def list_users(bot, message):
             outfile.write(out)
         await message.reply_document('users.txt', caption="Lɪꜱᴛ Oꜰ Uꜱᴇʀꜱ")
 
-@Client.on_message(filters.command('chats') & filters.user(ADMINS))
+@Client.on_message(filters.command(["chats"], PREFIX) & filters.user(ADMINS))
 async def list_chats(bot, message):
     sps = await message.reply('Gᴇᴛᴛɪɴɢ Lɪꜱᴛ Oꜰ Cʜᴀᴛꜱ')
     chats = await db.get_all_chats()
@@ -215,7 +216,7 @@ async def list_chats(bot, message):
 
 
 
-@Client.on_message(filters.command('id'))
+@Client.on_message(filters.command(["id"], PREFIX))
 async def show_id(client, message):
     chat_type = message.chat.type
     if chat_type == enums.ChatType.PRIVATE:
@@ -252,7 +253,7 @@ async def show_id(client, message):
         await message.reply_text(_id, quote=True)
             
 
-@Client.on_message(filters.command(["info"]))
+@Client.on_message(filters.command(["info"], PREFIX))
 async def user_info(client, message):
     status_message = await message.reply_text("`ᴩʟᴇᴀꜱᴇ ᴡᴀɪᴛ....`")
     from_user = None
@@ -303,7 +304,7 @@ async def user_info(client, message):
         )
     await status_message.delete()
 
-@Client.on_message(filters.command(["imdb", 'search']))
+@Client.on_message(filters.command(["imdb", 'search'], PREFIX))
 async def imdb_search(client, message):
     if ' ' in message.text:
         k = await message.reply('ꜱᴇᴀʀᴄʜɪɴɢ ɪᴍᴅʙ..')
@@ -372,13 +373,13 @@ async def imdb_callback(bot: Client, quer_y: CallbackQuery):
         await quer_y.message.edit(caption, reply_markup=InlineKeyboardMarkup(btn), disable_web_page_preview=False)
    
    
-@Client.on_message(filters.command('logs') & filters.user(ADMINS))
+@Client.on_message(filters.command(["logs"], PREFIX) & filters.user(ADMINS))
 async def log_file(bot, msg):
     try: await message.reply_document('BotLog.txt')
     except Exception as e: await message.reply(str(e))
 
 
-@Client.on_message(filters.command("restart") & filters.user(ADMINS))
+@Client.on_message(filters.command(["restart"], PREFIX) & filters.user(ADMINS))
 async def restart_bot(bot, msg):
     await msg.reply("Rᴇꜱᴛᴀᴛɪɴɢ........")
     await asyncio.sleep(2)
