@@ -77,7 +77,7 @@ async def send_for_index(bot, message):
     await message.reply(f'Do You Want To Index This Channel/ Group ?\n\nChat ID/ Username: <code>{chat_id}</code>\nLast Message ID: <code>{last_msg_id}</code>', reply_markup=buttons)
     
 
-@Client.on_message(filters.command('setskip') & filters.user(ADMINS))
+@Client.on_message(filters.command(["setskip"], PREFIX) & filters.user(ADMINS))
 async def set_skip_number(bot, message):
     if len(message.command) == 2:
         try: skip = int(message.text.split(" ", 1)[1])
