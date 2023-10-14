@@ -12,7 +12,7 @@ from googletrans import Translator
 from gtts import gTTS
 from pyrogram import Client, filters
 from pyrogram.types import Message
-
+from info inport PREFIX
 
 def convert(text):
     audio = BytesIO()
@@ -24,7 +24,7 @@ def convert(text):
     return audio
 
 
-@Client.on_message(filters.command("tts"))
+@Client.on_message(filters.command(["tts"], PREFIX))
 async def text_to_speech(_, message: Message):
     if not message.reply_to_message:
         return await message.reply_text("Reply To Some Text FFS.")           
