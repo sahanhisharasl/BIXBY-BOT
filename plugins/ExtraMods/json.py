@@ -35,7 +35,7 @@ async def jsonify(_, message):
         os.remove("json.text")
 
 
-@Client.on_message(filters.command("written"))
+@Client.on_message(filters.command("written", PREFIX))
 async def create_file(c, message):
     content = message.reply_to_message.text
     file_name = message.text.split(" ", 1)[1]   
