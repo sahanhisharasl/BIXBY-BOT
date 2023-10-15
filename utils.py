@@ -14,6 +14,7 @@ from typing import Union, List
 from datetime import datetime, timedelta
 from database.users_chats_db import db
 from bs4 import BeautifulSoup
+from utils import send_all
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
