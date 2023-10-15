@@ -22,7 +22,7 @@ async def logo(bot, msg: Message):
     await msg.reply_photo(
         photo=f"{req}")
 
-@Client.on_message(filters.command("animelogo"))
+@Client.on_message(filters.command(["animelogo"], PREFIX))
 async def animelogo(bot, msg: Message):
     if len(msg.command) == 1:
        return await msg.reply_text("Usage:\n\n /animelogo Ziyan")
