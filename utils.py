@@ -166,7 +166,7 @@ def list_to_str(k):
         return ' '.join(f'{elem}, ' for elem in k)
 
 __repo__ = "https://github.com/DX-MODS/BIXBY-BOT"
-__version__ = "BIXBY-BOT V5.0"
+__version__ = "BIXBY-BOT V4.70"
 __license__ = "GNU GENERAL PUBLIC LICENSE V3"
 __copyright__ = "Copyright (C) 2023-present Ziyan <https://github.com/DX-MODS>"
 
