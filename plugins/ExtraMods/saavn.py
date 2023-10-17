@@ -4,8 +4,9 @@
 #Author ZIYAN
 #Kanged from Masterolic
 from pyrogram import Client, filters
+from info import PREFIX
 import wget,os,requests
-@Client.on_message(filters.command('saavn') & filters.text)
+@Client.on_message(filters.command('saavn', PREFIX) & filters.text)
 async def song(client, message):
     try:
        args = message.text.split(None, 1)[1]
