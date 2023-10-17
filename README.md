@@ -119,7 +119,7 @@ enable - re-enable chat.
 ban_user  - to ban a user.
 unban_user  - to unban a user.
 channel - to get list of total connected channels
-broadcast - to broadcast a message to all Eva Maria users
+broadcast - to broadcast a message to all users in database
 ```
 
 ## TELAGRAM SUPPORT 
@@ -129,5 +129,5 @@ broadcast - to broadcast a message to all Eva Maria users
 ## Disclaimer
 [![GNU Affero General Public License 2.0](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl-3.0.en.html#header)    
 Licensed under [GNU AGPL 2.0.](https://github.com/DX-MODS/BIXBY-BOT/blob/master/LICENSE)
-Don't copy the codes and re distribute without my license and credits is strictly prohibited as per the MIT license provided here
+Don't copy the codes and re distribute without my license and credits is strictly prohibited as per the AGPL license provided here
 
