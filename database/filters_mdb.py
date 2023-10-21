@@ -5,14 +5,14 @@
 #if you use our codes try to donate here https://www.buymeacoffee.com/ziyankp
 
 import pymongo
-from pyrogram import enums 
 from info import DATABASE_URL, DATABASE_NAME
+from pyrogram import enums
 import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 
 myclient = pymongo.MongoClient(DATABASE_URL)
-mydb = myclient["ManualFilters"]
+mydb = myclient[DATABASE_NAME]
 
 
 
@@ -101,10 +101,7 @@ async def count_filters(group_id):
     mycol = mydb[str(group_id)]
 
     count = mycol.count()
-    if count == 0:
-        return False
-    else:
-        return count
+    return False if count == 0 else count
 
 
 async def filter_stats():
@@ -122,3 +119,4 @@ async def filter_stats():
     totalcollections = len(collections)
 
     return totalcollections, totalcount
+
