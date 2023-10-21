@@ -13,14 +13,15 @@ from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
 from motor.motor_asyncio import AsyncIOMotorClient
 from marshmallow.exceptions import ValidationError
-from info import FILE_DB_URL, FILE_DB_NAME, COLLECTION_NAME, MAX_RIST_BTNS
+from info import DATABASE_URL, DATABASE_NAME, COLLECTION_NAME, USE_CAPTION_FILTER, MAX_B_TN
+from utils import get_settings, save_group_settings
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
-client = AsyncIOMotorClient(FILE_DB_URL)
-db = client[FILE_DB_NAME]
+client = AsyncIOMotorClient(DATABASE_URL)
+db = client[DATABASE_NAME]
 instance = Instance.from_db(db)
 
 @instance.register
@@ -34,10 +35,14 @@ class Media(Document):
     caption = fields.StrField(allow_none=True)
 
     class Meta:
+        indexes = ('$file_name', )
         collection_name = COLLECTION_NAME
 
 
 async def save_file(media):
+    """Save file in database"""
+
+    # TODO: Find better way to get same file_id for same media to avoid duplicates
     file_id, file_ref = unpack_new_file_id(media.file_id)
     file_name = re.sub(r"(_|\-|\.|\+)", " ", str(media.file_name))
     try:
@@ -47,36 +52,73 @@ async def save_file(media):
             file_name=file_name,
             file_size=media.file_size,
             file_type=media.file_type,
-            mime_type=media.mime_type
+            mime_type=media.mime_type,
+            caption=media.caption.html if media.caption else None,
         )
     except ValidationError:
-        logger.exception('Error Occurred While Saving File In Database')
+        logger.exception('Error occurred while saving file in database')
         return False, 2
     else:
         try:
             await file.commit()
         except DuplicateKeyError:      
-            logger.warning(str(getattr(media, "file_name", "NO FILE NAME")) + " is already saved in database")
+            logger.warning(
+                f'{getattr(media, "file_name", "NO_FILE")} is already saved in database'
+            )
+
             return False, 0
         else:
-            logger.info(str(getattr(media, "file_name", "NO FILE NAME")) + " is saved in database")
+            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to database')
             return True, 1
 
 
 
-async def get_search_results(query, file_type=None, max_results=(MAX_RIST_BTNS), offset=0, filter=False):
+async def get_search_results(chat_id, query, file_type=None, max_results=10, offset=0, filter=False):
+    """For given query return (results, next_offset)"""
+    if chat_id is not None:
+        settings = await get_settings(int(chat_id))
+        try:
+            if settings['max_btn']:
+                max_results = 10
+            else:
+                max_results = int(MAX_B_TN)
+        except KeyError:
+            await save_group_settings(int(chat_id), 'max_btn', False)
+            settings = await get_settings(int(chat_id))
+            if settings['max_btn']:
+                max_results = 10
+            else:
+                max_results = int(MAX_B_TN)
     query = query.strip()
-    if not query: raw_pattern = '.'
-    elif ' ' not in query: raw_pattern = r'(\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_])'
-    else: raw_pattern = query.replace(' ', r'.*[\s\.\+\-_]')
-    try: regex = re.compile(raw_pattern, flags=re.IGNORECASE)
-    except: return []
-    filter = {'file_name': regex}
-    if file_type: filter['file_type'] = file_type
+    #if filter:
+        #better ?
+        #query = query.replace(' ', r'(\s|\.|\+|\-|_)')
+        #raw_pattern = r'(\s|_|\-|\.|\+)' + query + r'(\s|_|\-|\.|\+)'
+    if not query:
+        raw_pattern = '.'
+    elif ' ' not in query:
+        raw_pattern = r'(\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_])'
+    else:
+        raw_pattern = query.replace(' ', r'.*[\s\.\+\-_]')
+    
+    try:
+        regex = re.compile(raw_pattern, flags=re.IGNORECASE)
+    except:
+        return []
+
+    if USE_CAPTION_FILTER:
+        filter = {'$or': [{'file_name': regex}, {'caption': regex}]}
+    else:
+        filter = {'file_name': regex}
+
+    if file_type:
+        filter['file_type'] = file_type
 
     total_results = await Media.count_documents(filter)
     next_offset = offset + max_results
-    if next_offset > total_results: next_offset = ''
+
+    if next_offset > total_results:
+        next_offset = ''
 
     cursor = Media.find(filter)
     # Sort by recent
@@ -85,8 +127,45 @@ async def get_search_results(query, file_type=None, max_results=(MAX_RIST_BTNS),
     cursor.skip(offset).limit(max_results)
     # Get list of files
     files = await cursor.to_list(length=max_results)
+
     return files, next_offset, total_results
 
+async def get_bad_files(query, file_type=None, filter=False):
+    """For given query return (results, next_offset)"""
+    query = query.strip()
+    #if filter:
+        #better ?
+        #query = query.replace(' ', r'(\s|\.|\+|\-|_)')
+        #raw_pattern = r'(\s|_|\-|\.|\+)' + query + r'(\s|_|\-|\.|\+)'
+    if not query:
+        raw_pattern = '.'
+    elif ' ' not in query:
+        raw_pattern = r'(\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_])'
+    else:
+        raw_pattern = query.replace(' ', r'.*[\s\.\+\-_]')
+    
+    try:
+        regex = re.compile(raw_pattern, flags=re.IGNORECASE)
+    except:
+        return []
+
+    if USE_CAPTION_FILTER:
+        filter = {'$or': [{'file_name': regex}, {'caption': regex}]}
+    else:
+        filter = {'file_name': regex}
+
+    if file_type:
+        filter['file_type'] = file_type
+
+    total_results = await Media.count_documents(filter)
+
+    cursor = Media.find(filter)
+    # Sort by recent
+    cursor.sort('$natural', -1)
+    # Get list of files
+    files = await cursor.to_list(length=total_results)
+
+    return files, total_results
 
 async def get_file_details(query):
     filter = {'file_id': query}
@@ -98,6 +177,7 @@ async def get_file_details(query):
 def encode_file_id(s: bytes) -> str:
     r = b""
     n = 0
+
     for i in s + bytes([22]) + bytes([4]):
         if i == 0:
             n += 1
@@ -105,7 +185,9 @@ def encode_file_id(s: bytes) -> str:
             if n:
                 r += b"\x00" + bytes([n])
                 n = 0
+
             r += bytes([i])
+
     return base64.urlsafe_b64encode(r).decode().rstrip("=")
 
 
