@@ -12,12 +12,14 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 
 myclient = pymongo.MongoClient(DATABASE_URL)
-mydb = myclient["GlobalFilters"]
+mydb = myclient[DATABASE_NAME]
 
 
 
 async def add_gfilter(gfilters, text, reply_text, btn, file, alert):
     mycol = mydb[str(gfilters)]
+    # mycol.create_index([('text', 'text')])
+
     data = {
         'text':str(text),
         'reply':str(reply_text),
@@ -25,6 +27,7 @@ async def add_gfilter(gfilters, text, reply_text, btn, file, alert):
         'file':str(file),
         'alert':str(alert)
     }
+
     try:
         mycol.update_one({'text': str(text)},  {"$set": data}, upsert=True)
     except:
@@ -81,15 +84,15 @@ async def delete_gfilter(message, text, gfilters):
 
 async def del_allg(message, gfilters):
     if str(gfilters) not in mydb.list_collection_names():
-        await message.edit_text("Nothin!")
+        await message.edit_text("Nothing to Remove !")
         return
 
     mycol = mydb[str(gfilters)]
     try:
         mycol.drop()
-        await message.edit_text(f"All filters has been removed")
+        await message.edit_text(f"All gfilters has been removed !")
     except:
-        await message.edit_text("Couldn't remove all filters!")
+        await message.edit_text("Couldn't remove all gfilters !")
         return
 
 async def count_gfilters(gfilters):
@@ -114,3 +117,4 @@ async def gfilter_stats():
     totalcollections = len(collections)
 
     return totalcollections, totalcount
+
