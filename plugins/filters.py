@@ -274,5 +274,5 @@ async def delallconfirm(client, message):
                 [InlineKeyboardButton(text="CANCEL",callback_data="delallcancel")]
             ]),
             quote=True
-            )
-    
+       )
+       
