@@ -3,16 +3,12 @@
 #you may not use this file except in compliance with the License.
 #Author ZIYAN
 #if you use our codes try to donate here https://www.buymeacoffee.com/ziyankp
-from utils import temp
 class script(object):
-    
-    START_TXT = """<b>✨ Hᴇʟʟᴏ {temp.U_NAME}.
+    START_TXT = """<b>Hᴇʟʟᴏ {},
+Mʏ Nᴀᴍᴇ Is <a href=https://t.me/{}>{}</a>, I Cᴀɴ Pʀᴏᴠɪᴅᴇ Mᴏᴠɪᴇs, Jᴜsᴛ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ As Aᴅᴍɪɴ Aɴᴅ Eɴᴊᴏʏ 😍</b>"""
 
-Mʏ Nᴀᴍᴇ Is {temp.B_NAME}.
-
-I Cᴀɴ Pʀᴏᴠɪᴅᴇ Mᴏᴠɪᴇ Fᴏʀ Yᴏᴜ Jᴜsᴛ Aᴅᴅ Mᴇ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ Oʀ Jᴏɪɴ Oᴜʀ Gʀᴏᴜᴘ</b>"""
-    
-    HELP_TXT = "Hᴇʏ {}\nHᴇʀᴇ Mꜱ Mʏ Hᴇʟᴩ"
+    HELP_TXT = """<b>Hᴇʏ {}
+Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.</b>"""
 
     ABOUT_TXT = """<b>✯ Mʏ ɴᴀᴍᴇ: {}
 ✯ Dᴇᴠᴇʟᴏᴩᴇʀ: <a herf=https://t.me/dxziyan>ᴢɪʏᴀɴ</a>
