@@ -3,12 +3,12 @@
 #you may not use this file except in compliance with the License.
 #Author ZIYAN
 #if you use our codes try to donate here https://www.buymeacoffee.com/ziyankp
-
+from utils import temp
 class script(object):
-    class script(object):  
-    START_TXT = """<b>✨ Hᴇʟʟᴏ {user}.
+    
+    START_TXT = """<b>✨ Hᴇʟʟᴏ {temp.U_NAME}.
 
-Mʏ Nᴀᴍᴇ Is {bot}.
+Mʏ Nᴀᴍᴇ Is {temp.B_NAME}.
 
 I Cᴀɴ Pʀᴏᴠɪᴅᴇ Mᴏᴠɪᴇ Fᴏʀ Yᴏᴜ Jᴜsᴛ Aᴅᴅ Mᴇ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ Oʀ Jᴏɪɴ Oᴜʀ Gʀᴏᴜᴘ</b>"""
     
