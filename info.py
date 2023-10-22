@@ -25,7 +25,8 @@ BOT_TOKEN = environ.get('BOT_TOKEN', "")
 UPTIME = time.time()
 PORT = int(environ.get("PORT", "8080"))
 PING_INTERVAL = int(environ.get("PING_INTERVAL", "120"))
-PING_WEB   = environ.get("PING_WEB", "")
+PING_WEB = environ.get("PING_WEB", "")
+WEBHOOK = bool(environ.get("WEBHOOK", True))
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
