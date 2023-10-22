@@ -5,6 +5,7 @@
 #if you use our codes try to donate here https://www.buymeacoffee.com/ziyankp
 
 import re
+import time
 from os import environ
 from Script import script 
 
