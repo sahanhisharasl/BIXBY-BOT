@@ -21,3 +21,4 @@ dnspython==2.3.0
 wget
 Pillow==9.4.0
 psutil==5.9.4
+openai
