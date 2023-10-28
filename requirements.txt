@@ -22,3 +22,5 @@ wget
 Pillow==9.4.0
 psutil==5.9.4
 openai
+opencv-python-headless==4.7.0.68
+NumPy
