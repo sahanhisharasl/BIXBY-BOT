@@ -5,7 +5,7 @@
 #if you use our codes try to donate here https://www.buymeacoffee.com/ziyankp
 
 import os
-from helpers.font_string import Fonts
+from plugins.helper.font_string import Fonts
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from info import PREFIX

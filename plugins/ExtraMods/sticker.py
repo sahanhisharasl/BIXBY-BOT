@@ -10,8 +10,8 @@ from traceback import format_exc
 from pyrogram import filters, Client
 from pyrogram.types import *
 from pyrogram.errors import *
-from helpers.files import *
-from helpers.sticker_set import *
+from plugins.helper.files import *
+from plugins.helper.sticker_set import *
 from info import PREFIX
     
 MAX_STICKERS = (120)  # would be better if we could fetch this limit directly from telegram
