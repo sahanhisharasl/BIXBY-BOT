@@ -73,7 +73,7 @@ async def is_subscribed(bot, query):
     return False
 
 __repo__ = "https://github.com/DX-MODS/BIXBY-BOT"
-__version__ = "BIXBY-BOT V4.70"
+__version__ = "BIXBY-BOT V6.0"
 __license__ = "GNU GENERAL PUBLIC LICENSE V3"
 __copyright__ = "Copyright (C) 2023-present Ziyan <https://github.com/DX-MODS>"
 
