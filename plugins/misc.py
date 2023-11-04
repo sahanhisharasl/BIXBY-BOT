@@ -9,8 +9,8 @@ from pyrogram import Client, filters, enums
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant, MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from info import IMDB_TEMPLATE
 from utils import extract_user, get_file_id, get_poster, last_online
-import time
-from datetime import datetime
+import pytz
+from datetime import datetime, timedelta, date, time
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 import logging
 logger = logging.getLogger(__name__)
@@ -157,6 +157,7 @@ async def imdb_search(client, message):
 @Client.on_callback_query(filters.regex('^imdb'))
 async def imdb_callback(bot: Client, quer_y: CallbackQuery):
     i, movie = quer_y.data.split('#')
+    curr_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
     imdb = await get_poster(query=movie, id=True)
     btn = [
             [
@@ -167,6 +168,9 @@ async def imdb_callback(bot: Client, quer_y: CallbackQuery):
             ]
         ]
     message = quer_y.message.reply_to_message or quer_y.message
+    cur_time = datetime.now(pytz.timezone('Asia/Kolkata')).time()
+    time_difference = timedelta(hours=cur_time.hour, minutes=cur_time.minute, seconds=(cur_time.second+(cur_time.microsecond/1000000))) - timedelta(hours=curr_time.hour, minutes=curr_time.minute, seconds=(curr_time.second+(curr_time.microsecond/1000000)))
+    remaining_seconds = "{:.2f}".format(time_difference.total_seconds())
     if imdb:
         caption = IMDB_TEMPLATE.format(
             query = imdb['title'],
@@ -215,6 +219,10 @@ async def imdb_callback(bot: Client, quer_y: CallbackQuery):
     else:
         await quer_y.message.edit(caption, reply_markup=InlineKeyboardMarkup(btn), disable_web_page_preview=False)
     await quer_y.answer()
+        
+
+
+  
         
 
 

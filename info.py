@@ -28,6 +28,7 @@ PORT = int(environ.get("PORT", "8080"))
 PING_INTERVAL = int(environ.get("PING_INTERVAL", "120"))
 PING_WEB = environ.get("PING_WEB", "")
 WEBHOOK = bool(environ.get("WEBHOOK", True))
+MAINTENANCE_MODE = bool(environ.get("MAINTENANCE_MODE", False))
 PREFIX = environ.get("PREFIX", "/")
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
