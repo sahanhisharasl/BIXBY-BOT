@@ -29,6 +29,7 @@ BATCH_FILES = {}
 async def start(client, message):
     if MAINTENANCE_MODE is True:
       await message.reply_text("ʙᴏᴛ ɪꜱ ɪɴ ᴍᴀɪɴᴛᴇɴᴀɴᴄᴇ ᴘʟᴇᴀꜱᴇ ᴛʀʏ ᴀꜰᴛᴇʀ ꜱᴏᴍᴇᴛɪᴍᴇ ᴏʀ ᴄᴏɴᴛᴀᴄᴛ ᴏᴡɴᴇʀ") 
+      return
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         buttons = [[
                     InlineKeyboardButton('⤬ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
