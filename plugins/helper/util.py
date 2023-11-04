@@ -23,7 +23,7 @@ import requests
 from typing import Tuple
 from pyrogram import filters
 from pyrogram import Client
-from plugins.helper.shazam import humanbytes, edit_or_reply, fetch_audio
+from plugins.helper.shazzam import humanbytes, edit_or_reply, fetch_audio
 
 help_message = []
 
