@@ -6,7 +6,6 @@
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import Client, filters
-from plugins.query import *
 
 
 @Client.on_message(filters.photo & filters.private)
